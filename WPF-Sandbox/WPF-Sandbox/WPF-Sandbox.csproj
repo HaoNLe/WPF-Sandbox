@@ -86,11 +86,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Components\Actor.cs" />
+    <Compile Include="Components\Team.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\SandboxViewModel.cs" />
+    <Compile Include="Views\FlattenedListView.xaml.cs">
+      <DependentUpon>FlattenedListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SandboxView.xaml.cs">
       <DependentUpon>SandboxView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\FlattenedListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

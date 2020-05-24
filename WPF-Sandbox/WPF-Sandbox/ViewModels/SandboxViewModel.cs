@@ -4,18 +4,35 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Prism.Commands;
 using Prism.Mvvm;
+using WPF_Sandbox.Components;
 
 namespace WPF_Sandbox.ViewModels
 {
     public class SandboxViewModel : BindableBase
     {
+        public DelegateCommand PopulateTeams { get; set; }
         public SandboxViewModel()
         {
-            Teams = new ObservableCollection<Team>();
-            Teams.Add(new Team());
-            Teams.Add(new Team());
-            Teams.Add(new Team());
+            PopulateTeams = new DelegateCommand(GenerateTeams);
+            Teams = new ObservableCollection<Team>
+            {
+                new Team(new List<Actor>()
+                { 
+                    new Actor(){Id=12, Name="Brad Pitt"},
+                    new Actor(){Id=23, Name="Angelina Jolie"}
+                }),
+                new Team(new List<Actor>()
+                {
+                    new Actor(){Id=387, Name="Joseph Gordon Levitt"},
+                    new Actor(){Id=2, Name="Leonardo DiCaprio"}
+                }),
+                new Team(new List<Actor>()
+                {
+                    new Actor(){Id=72, Name="Johnny Depp"}
+                })
+            };
         }
         private ObservableCollection<Team> _teams;
 
@@ -25,54 +42,20 @@ namespace WPF_Sandbox.ViewModels
             set { _teams = value; }
         }
 
-    }
+        private Actor _selectedActor;
 
-    public class Team 
-    {
-        public Team()
+        public Actor SelectedActor
         {
-            Actors = new ObservableCollection<Actor>();
-            Actors.Add(new Actor());
-            Actors.Add(new Actor());
-            Actors.Add(new Actor());
+            get { return _selectedActor; }
+            set { _selectedActor = value; }
         }
 
-        private ObservableCollection<Actor> _actors;
-
-        public ObservableCollection<Actor> Actors
+        private void GenerateTeams()
         {
-            get { return _actors; }
-            set { _actors = value; }
+            Teams.Add(new Team(new List<Actor>()
+                {
+                    new Actor(){Id=159, Name="New Actor"}
+                }));
         }
     }
-
-    public class Actor 
-    {
-        public Actor()
-        {
-            Random random = new Random();
-            Id = random.Next(100);
-            double flt = random.NextDouble();
-            int shift = Convert.ToInt32(Math.Floor(25 * flt));
-            string letter = Convert.ToString(shift + 65);
-            Name = letter;
-        }
-        private int _id;
-        public int Id
-        {
-            get { return _id; }
-            set { _id = value; }
-        }
-
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
-
-    }
-
 }

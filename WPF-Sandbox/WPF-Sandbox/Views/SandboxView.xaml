@@ -7,23 +7,22 @@
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-        <ItemsControl ItemsSource="{Binding Teams}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <ListView Margin="10" ItemsSource="{Binding }"
-                          SelectedItem="{Binding SelectedActor}" >
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Id" Width="80" DisplayMemberBinding="{Binding Id}"/>
-                                <GridViewColumn Header="Name" Width="160" 
-                                            DisplayMemberBinding="{Binding Name}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+             d:DesignHeight="450" d:DesignWidth="800"
+             >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <local:FlattenedListView Teams="{Binding Teams, Mode=TwoWay}" SelectedActor="{Binding SelectedActor, Mode=TwoWay}"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="Selected Actor:"/>
+            <TextBlock Text="{Binding SelectedActor.Id}"/>
+            <TextBlock Text="{Binding SelectedActor.Name}"/>
+        </StackPanel>
+        <Button Grid.Row="2"
+                Command="{Binding PopulateTeams}"
+                Content="Generate Teams" />
     </Grid>
 </UserControl>
