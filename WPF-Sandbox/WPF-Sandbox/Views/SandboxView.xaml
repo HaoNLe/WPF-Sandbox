@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="WPF_Sandbox.Views.SandboxView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_Sandbox.Views"
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <ItemsControl ItemsSource="{Binding Teams}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ListView Margin="10" ItemsSource="{Binding }"
+                          SelectedItem="{Binding SelectedActor}" >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" Width="80" DisplayMemberBinding="{Binding Id}"/>
+                                <GridViewColumn Header="Name" Width="160" 
+                                            DisplayMemberBinding="{Binding Name}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </Grid>
+</UserControl>
